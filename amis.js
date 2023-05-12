@@ -65,8 +65,8 @@ function combat(a, b) {
     // du pourcentage de victoire
     if (niveauA !== niveauB) {
         const [strongest, weakest] = 
-            [a, b].sort((a, b) => b.niveau - a.niveau);
-        percentage = (strongest.niveau / weakest.niveau) * 50;
+            [a, b].sort((a, b) => niveauB - niveauA);
+        percentage = ((strongest.niveau * 10) / weakest.niveau) * 50;
         
         // Si on est dans la première moitié du pourcentage,
         // alors le plus fort à gagné
