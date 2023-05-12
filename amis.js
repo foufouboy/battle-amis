@@ -93,7 +93,7 @@ function combat(a, b) {
 }
 
 function addData() {
-    turnsData.push(guerriers);    
+    turnsData.push(JSON.parse(JSON.stringify(guerriers)));   
 }
 
 function makeTurnAnd(func = () => {}) {
