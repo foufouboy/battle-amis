@@ -66,16 +66,17 @@ function combat(a, b) {
     if (niveauA !== niveauB) {
         let strongest = null;
         let weakest = null;
+        let percentage = 0;
         
         if (niveauA > niveauB) {
             strongest = a;
             weakest = b;
+            percentage = (niveauA / niveauB) * 50;
         } else {
             strongest = b;
             weakest = a;
+            percentage = (niveauB / niveauA) * 50;
         }
-        
-        percentage = ((strongest.niveau * 10) / weakest.niveau) * 50;
         
         // Si on est dans la première moitié du pourcentage,
         // alors le plus fort à gagné
