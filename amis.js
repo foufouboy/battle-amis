@@ -51,7 +51,7 @@ function shuffle(a) {
 
 function combat(a, b) {
     let niveauA = a.niveau;
-    let niveauB = a.niveau;
+    let niveauB = b.niveau;
     const tirage = ~(Math.random() * 100);
 
     // on commence par tester les classes
