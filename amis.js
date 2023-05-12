@@ -64,8 +64,8 @@ function combat(a, b) {
     // Puis, si les niveaux ne sont pas équivalents, on procède au calcul 
     // du pourcentage de victoire
     if (niveauA !== niveauB) {
-        const strongest = null;
-        const weakest = null;
+        let strongest = null;
+        let weakest = null;
         
         if (niveauA > niveauB) {
             strongest = a;
