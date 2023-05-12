@@ -39,7 +39,7 @@ iterationSlt.addEventListener("input", _ => {
 
 function validInput(input) {
     input = +input;
-    return (0 <= input && input <= 200) && Number.isInteger(input)
+    return (0 <= input && input <= 1000) && Number.isInteger(input)
 }
 
 function shuffle(a) {
