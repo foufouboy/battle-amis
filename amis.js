@@ -61,12 +61,17 @@ function combat(a, b) {
         niveauB *= 10;
     }
 
-
+    // Puis, si les niveaux ne sont pas équivalents, on procède au calcul 
+    // du pourcentage de victoire
     if (niveauA !== niveauB) {
         const [strongest, weakest] = 
             [a, b].sort((a, b) => b.niveau - a.niveau);
         percentage = (strongest.niveau / weakest.niveau) * 50;
-
+        
+        // Si on est dans la première moitié du pourcentage,
+        // alors le plus fort à gagné
+        // (ce qui fait que si le plus fort a 200% de chances de gagner, il ne perd jamais
+        // car le tirage va de 1 à 100)
         if (tirage < percentage) {
             strongest.niveau += weakest.niveau;
             weakest.niveau = 1;
@@ -74,7 +79,7 @@ function combat(a, b) {
             weakest.niveau += strongest.niveau;
             strongest.niveau += 1;
         }
-
+    // Sinon on procède simplement à un pile ou face...
     } else {
         if (tirage < 50) {
             a.niveau += b.niveau;
@@ -84,6 +89,7 @@ function combat(a, b) {
             a.niveau = 1;
         }
     }
+    //...et celui qui perd donne ses niveaux à l'autre
 }
 
 function addData() {
@@ -103,6 +109,7 @@ function makeTurnAnd(func = () => {}) {
 function newSimulation() {
     guerriers = [];
     turnsData = [];
+    
     for (let barbares = nbBarbares; barbares; barbares--) guerriers.push(new Barbare()); 
     for (let sorciers = nbSorciers; sorciers; sorciers--) guerriers.push(new Sorcier()); 
     for (let sorciersNoirs = nbNoirs; sorciersNoirs; sorciersNoirs--) guerriers.push(new SorcierNoir()); 
@@ -113,15 +120,15 @@ function newSimulation() {
     }
 
     showIteration(nbCombats);
-    console.log(guerriers);
-    console.log(nbBarbares, nbSorciers, nbNoirs, nbPaladins);
 }
 
 function showIteration(n) {
+    // à diviser si continuation
     table.innerHTML = "";
     const turnWarriors = turnsData[n - 1];
     console.log(turnWarriors);
-
+    
+    // affichage du ratio de niveaux
     const levelsData = turnWarriors.reduce((a, e) => {
         if (e.niveau > 1) {
             a[e.classe] ? a[e.classe]++ : a[e.classe] = 1;
@@ -138,7 +145,8 @@ function showIteration(n) {
         .textContent = levelsData.SorcierNoir;
     document.querySelector(".paladin-truc span")
         .textContent = levelsData.Paladin;
-
+    
+    // affichage de tous les niveaux
     for (let i = 0; i < turnWarriors.length; i++) {
         const newRow = document.createElement("tr");
         const barCell = document.createElement("td");
